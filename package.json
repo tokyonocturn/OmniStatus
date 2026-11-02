@@ -1,0 +1,46 @@
+{
+  "name": "omnistatus",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Open source Discord Rich Presence for the web: browser extension, local bridge, integration directory.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "bin": {
+    "omnistatus": "src/bridge/cli.ts"
+  },
+  "scripts": {
+    "build": "npm run build:extension && npm run build:site",
+    "build:extension": "node scripts/build-extension.ts",
+    "build:site": "node scripts/build-site.ts",
+    "package": "node scripts/package.ts",
+    "social": "node scripts/prepare-social.ts",
+    "icons": "node scripts/generate-icons.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.node.json --noEmit",
+    "test": "node --test --test-concurrency=1 \"tests/**/*.test.ts\"",
+    "guard": "node scripts/guard.ts",
+    "verify": "npm run guard && npm run typecheck && npm test && npm run build && npm run package",
+    "bridge": "node src/bridge/cli.ts",
+    "serve:site": "node scripts/serve-site.ts"
+  },
+  "dependencies": {
+    "marked": "^15.0.7",
+    "ws": "^8.18.0"
+  },
+  "files": [
+    "src",
+    "dist/extension",
+    "dist/release",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/ws": "^8.5.14",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.2"
+  }
+}
